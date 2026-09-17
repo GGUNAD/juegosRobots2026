@@ -212,3 +212,65 @@ footer h2 {
     border-left: 6px solid #DE2910;
     margin-top: 0;
 }
+
+/* ------------------------------------------------------------
+   CREDITOS DE IMAGEN
+   La etiqueta figure agrupa la imagen con su credito, y
+   figcaption es el texto asociado a esa imagen. Es la forma
+   semantica correcta de acreditar una fotografia.
+   ------------------------------------------------------------ */
+
+figure {
+    margin: 0 0 20px 0;
+}
+
+figcaption {
+    font-size: 13px;
+    color: #4A4A4A;
+    padding-top: 6px;
+    word-wrap: break-word;
+}
+
+
+/* ------------------------------------------------------------
+   ADAPTACION A PANTALLAS PEQUENAS
+   La regla @media aplica estos estilos solo cuando el ancho de
+   la pantalla es igual o menor a 600 pixeles, que corresponde a
+   la mayoria de los telefonos.
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    /* El contenedor aprovecha casi todo el ancho disponible */
+    .contenedor {
+        width: 94%;
+    }
+
+    /* Titulos mas pequenos para que no ocupen varias lineas */
+    header h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    /* Cada opcion del menu ocupa su propia linea */
+    nav li {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    /* El campo de busqueda se ajusta al ancho de la pantalla */
+    .busqueda input {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    /* Las tablas se pueden desplazar en horizontal si no caben */
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
