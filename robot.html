@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,72 +8,93 @@
     <title>Robots - Juegos Mundiales de Robots - China 2026</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
+
     <a href="#contenido" class="salto">Saltar al contenido principal</a>
 
+    <!-- ENCABEZADO ------------------------------------------------ -->
     <header>
-        <div class="contenedor">
-            <h1>
-                <img src="imagenes/logo.png" alt="Sello rojo con un circulo dorado, logotipo del sitio" class="logo">
-                Juegos Mundiales de Robots - China 2026
-            </h1>
-            <p>Noticias, resultados e innovaciones de la robotica humanoide</p>
+        <div class="contenedor cabecera">
+            <img src="imagenes/logo.png" alt="Sello rojo con un circulo dorado, logotipo del sitio" class="logo">
+            <div>
+                <h1>Juegos Mundiales de Robots - China 2026</h1>
+                <p>Noticias, resultados e innovaciones de la robotica humanoide</p>
+            </div>
         </div>
     </header>
-    <nav>
+
+    <!-- MENU DE NAVEGACION ---------------------------------------- -->
+    <nav aria-label="Menu principal">
         <div class="contenedor">
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="resultados.html">Resultados</a></li>
-                <li><a href="robot.html" class="activo">Robots</a></li>
+                <li><a href="robot.html" class="activo" aria-current="page">Robots</a></li>
             </ul>
         </div>
     </nav>
+
+    <!-- CONTENIDO PRINCIPAL --------------------------------------- -->
     <main id="contenido">
         <div class="contenedor">
 
             <h2>Fichas tecnicas</h2>
 
             <p>
-                Esta seccion reune la informacion tecnica de los robots que obtuvieron los mejores resultados en la competencia, junto con el historial de pruebas en las
-                que participaron.
+                Esta seccion reune la informacion tecnica de los robots que obtuvieron los mejores
+                resultados en la competencia, junto con el historial de pruebas en las que participaron.
             </p>
+
+            <!-- PRIMERA FICHA ------------------------------------- -->
             <article class="destacada">
 
                 <h3>Tiangong Ultra</h3>
                 <p class="fecha">Fabricante: X-Humanoid</p>
-                <div style="text-align: center;">
-                    <figure>
-                    <img src="imagenes/robot-tiangong.png" alt="El robot Tiangong Ultra en plena carrera sobre la pista, con una pierna extendida en el aire">
-                    <figcaption>Fotografia: Mi Diario. Tomada de https://www.midiario.com/deportivas/robot-supera-a-usain-bolt-en-los-100-metros/</figcaption>
-                </figure>
+
+                <!-- La imagen y los datos se reparten en dos columnas
+                     con Flexbox. En movil se apilan automaticamente. -->
+                <div class="ficha">
+
+                    <div class="ficha-imagen">
+                        <figure>
+                            <img src="imagenes/robot-tiangong.png" alt="El robot Tiangong Ultra en plena carrera sobre la pista, con una pierna extendida en el aire">
+                            <figcaption>Fotografia: Mi Diario. Tomada de https://www.midiario.com/deportivas/robot-supera-a-usain-bolt-en-los-100-metros/</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="ficha-datos">
+                        <table>
+                            <caption>Especificaciones tecnicas de Tiangong Ultra</caption>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Altura</th>
+                                    <td>1,80 metros</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Peso</th>
+                                    <td>52 kilogramos</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Grados de libertad</th>
+                                    <td>28</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Autonomia</th>
+                                    <td>2 horas de operacion continua</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sensores</th>
+                                    <td>Camaras estereoscopicas y unidad de medicion inercial</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-                <table>
-                    <caption>Especificaciones tecnicas de Tiangong Ultra</caption>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Altura</th>
-                            <td>1,80 metros</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Peso</th>
-                            <td>52 kilogramos</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Grados de libertad</th>
-                            <td>28</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Autonomia</th>
-                            <td>2 horas de operacion continua</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Sensores</th>
-                            <td>Camaras estereoscopicas y unidad de medicion inercial</td>
-                        </tr>
-                    </tbody>
-                </table>
+
                 <h3>Historial de participacion</h3>
+
                 <table>
                     <caption>Pruebas disputadas por Tiangong Ultra</caption>
                     <thead>
@@ -102,41 +124,54 @@
                 </table>
 
             </article>
+
+            <!-- SEGUNDA FICHA ------------------------------------- -->
             <article class="destacada">
+
                 <h3>Unitree H1</h3>
                 <p class="fecha">Fabricante: Unitree Robotics</p>
-                <div style="text-align: center;">
-                    <figure>
-                    <img src="imagenes/robot-unitree.png" alt="El robot Unitree H1 de cuerpo completo, con rotulos que senalan sus sensores y grados de libertad">
-                    <figcaption>Imagen tecnica del fabricante Unitree Robotics. Uso academico con fines ilustrativos.</figcaption>
-                </figure>
+
+                <div class="ficha">
+
+                    <div class="ficha-imagen">
+                        <figure>
+                            <img src="imagenes/robot-unitree.png" alt="El robot Unitree H1 de cuerpo completo, con rotulos que senalan sus sensores y grados de libertad">
+                            <figcaption>Imagen tecnica del fabricante Unitree Robotics. Uso academico con fines ilustrativos.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="ficha-datos">
+                        <table>
+                            <caption>Especificaciones tecnicas de Unitree H1</caption>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Altura</th>
+                                    <td>1,80 metros</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Peso</th>
+                                    <td>47 kilogramos</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Grados de libertad</th>
+                                    <td>19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Autonomia</th>
+                                    <td>1 hora y 30 minutos de operacion continua</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sensores</th>
+                                    <td>Sensor de profundidad y unidad de medicion inercial</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-                <table>
-                    <caption>Especificaciones tecnicas de Unitree H1</caption>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Altura</th>
-                            <td>1,80 metros</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Peso</th>
-                            <td>47 kilogramos</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Grados de libertad</th>
-                            <td>19</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Autonomia</th>
-                            <td>1 hora y 30 minutos de operacion continua</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Sensores</th>
-                            <td>Sensor de profundidad y unidad de medicion inercial</td>
-                        </tr>
-                    </tbody>
-                </table>
+
                 <h3>Historial de participacion</h3>
+
                 <table>
                     <caption>Pruebas disputadas por Unitree H1</caption>
                     <thead>
@@ -159,24 +194,42 @@
                         </tr>
                     </tbody>
                 </table>
+
             </article>
+
             <p><a href="resultados.html">Consultar el medallero completo</a></p>
+
         </div>
     </main>
+
+    <!-- PIE DE PAGINA --------------------------------------------- -->
     <footer>
-        <div class="contenedor">
-            <h2>Sobre este sitio</h2>
-            <img src="imagenes/unad_logo.png" width="25%" alt="Logo de la Universidad Nacional Abierta y a Distancia">
-            <p>
-                Curso: Programación Web Código: 213025 Universidad Nacional Abierta y a Distancia 2026 - German Galindo
-            </p>
-            <p>
-                Secciones:
-                <a href="index.html">Inicio</a> |
-                <a href="resultados.html">Resultados</a> |
-                <a href="robot.html">Robots</a>
-            </p>
+        <div class="contenedor pie">
+
+            <div class="pie-bloque">
+                <h2>Sobre este sitio</h2>
+                <p>
+                    Curso: Programacion Web. Codigo: 213025. Universidad Nacional Abierta y a Distancia,
+                    2026. German Galindo.
+                </p>
+            </div>
+
+            <div class="pie-bloque">
+                <h2>Secciones</h2>
+                <p>
+                    <a href="index.html">Inicio</a> |
+                    <a href="resultados.html">Resultados</a> |
+                    <a href="robot.html">Robots</a>
+                </p>
+            </div>
+
+            <div class="pie-bloque">
+                <img src="imagenes/unad_logo.png" class="pie-logo" alt="Logo de la Universidad Nacional Abierta y a Distancia">
+            </div>
+
         </div>
     </footer>
+
 </body>
+
 </html>

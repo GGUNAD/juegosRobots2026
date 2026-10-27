@@ -1,17 +1,72 @@
+/* ============================================================
+   Juegos Mundiales de Robots 2026
+   Hoja de estilos principal
+   Curso: Programación Web - 213025
+   Autor: German Darío Galindo Rincón
+
+   Fase 3: accesibilidad (WCAG 2.1 nivel AA) y diseño adaptable
+   con Flexbox y Media Queries.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   0. MODELO DE CAJA
+   Por defecto el navegador suma el relleno y el borde al ancho
+   declarado, de modo que una caja de 300 px con 15 px de relleno
+   mide en realidad 330 px. Con "border-box" el ancho declarado
+   incluye relleno y borde, que es lo que permite repartir las
+   columnas con porcentajes exactos.
+   ------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   1. ESTILOS GENERALES
+   El body se declara como contenedor flexible en columna para
+   que el pie de página quede siempre abajo, aunque la página
+   tenga poco contenido. "min-height: 100vh" hace que el cuerpo
+   ocupe como mínimo el alto de la ventana.
+   ------------------------------------------------------------ */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #F5F2EA;
-    color: #111111;
+    background-color: #F5F2EA;   /* blanco hueso */
+    color: #111111;              /* negro, contraste 16.9:1 */
     margin: 0;
     padding: 0;
     line-height: 1.6;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* "flex: 1" hace que el contenido principal se estire y empuje
+   el pie de página hasta el borde inferior de la ventana. */
+
+main {
+    flex: 1;
+    padding: 30px 0;
 }
 
 .contenedor {
     width: 90%;
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
 }
+
+
+/* ------------------------------------------------------------
+   2. ENLACE DE SALTO (ACCESIBILIDAD)
+   Permite que quien navega con teclado salte el menú y llegue
+   directo al contenido. Permanece fuera de la pantalla hasta
+   que recibe el foco.
+   ------------------------------------------------------------ */
 
 .salto {
     position: absolute;
@@ -19,6 +74,7 @@ body {
     background-color: #FFDE00;
     color: #111111;
     padding: 10px;
+    z-index: 100;
 }
 
 .salto:focus {
@@ -26,53 +82,76 @@ body {
     top: 10px;
 }
 
+
+/* ------------------------------------------------------------
+   3. ENCABEZADO
+   El logotipo y el bloque de títulos se alinean en fila con
+   Flexbox. "align-items: center" los centra verticalmente entre
+   sí, sin importar cuál sea más alto.
+   ------------------------------------------------------------ */
+
 header {
-    background-color: #DE2910;
+    background-color: #DE2910;   /* rojo; con texto blanco da 4.74:1 */
     color: #FFFFFF;
     padding: 20px 0;
     border-bottom: 8px solid #111111;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 32px;
+.cabecera {
+    display: flex;
+    align-items: center;
+    gap: 20px;                   /* separación entre logo y títulos */
 }
 
-header p {
-    margin: 5px 0 0 0;
-    font-size: 16px;
-}
+/* "flex-shrink: 0" impide que el logotipo se encoja cuando el
+   espacio disponible se reduce. */
 
 .logo {
     width: 60px;
     height: 60px;
-    vertical-align: middle;
-    margin-right: 15px;
+    flex-shrink: 0;
     border: 3px solid #FFFFFF;
 }
 
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 4px 0 0 0;
+    font-size: 16px;
+}
+
+
+/* ------------------------------------------------------------
+   4. MENÚ DE NAVEGACIÓN
+   La lista se convierte en contenedor flexible. Es la forma
+   actual de construir un menú horizontal, en reemplazo de
+   display: inline-block.
+   ------------------------------------------------------------ */
+
 nav {
     background-color: #111111;
-    padding: 10px 0;
+    padding: 0;
 }
 
 nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
 
-nav li {
-    display: inline-block;
-    margin-right: 20px;
+    display: flex;
+    flex-wrap: wrap;             /* permite que baje de línea si no cabe */
+    gap: 4px;
 }
 
 nav a {
-    color: #FFFFFF;
+    color: #FFFFFF;              /* sobre negro da 18.9:1 */
     text-decoration: none;
     font-weight: bold;
-    padding: 6px 10px;
-    display: inline-block;
+    padding: 14px 18px;
+    display: block;
 }
 
 nav a:hover {
@@ -80,19 +159,29 @@ nav a:hover {
     color: #111111;
 }
 
+/* Indicador de foco visible: requisito 2.4.7 de WCAG. El
+   contorno permite seguir con la vista la navegación por
+   teclado. */
+
 nav a:focus {
     background-color: #FFDE00;
     color: #111111;
     outline: 3px solid #FFFFFF;
+    outline-offset: -3px;
 }
+
+/* La sección activa se marca con color de fondo y además con el
+   atributo aria-current en el HTML, de modo que la información
+   no dependa únicamente del color (criterio 1.4.1). */
 
 nav a.activo {
     background-color: #DE2910;
 }
 
-main {
-    padding: 30px 0;
-}
+
+/* ------------------------------------------------------------
+   5. TÍTULOS Y TEXTO
+   ------------------------------------------------------------ */
 
 h2 {
     font-size: 26px;
@@ -112,34 +201,143 @@ p {
 
 img {
     max-width: 100%;
+    height: auto;
 }
+
+.fecha {
+    color: #4A4A4A;              /* sobre fondo claro da 7.9:1 */
+    font-size: 14px;
+}
+
+
+/* ------------------------------------------------------------
+   6. CRÉDITOS DE IMAGEN
+   figure agrupa la imagen con su crédito y figcaption es el
+   texto asociado. Es la forma semántica de acreditar una foto.
+   ------------------------------------------------------------ */
+
+figure {
+    margin: 0 0 15px 0;
+}
+
+figcaption {
+    font-size: 13px;
+    color: #4A4A4A;
+    padding-top: 6px;
+    word-wrap: break-word;
+}
+
+
+/* ------------------------------------------------------------
+   7. NOTICIA DESTACADA
+   ------------------------------------------------------------ */
 
 .destacada {
     border: 4px solid #111111;
     padding: 20px;
     margin-bottom: 30px;
-}
-
-.destacada img {
-    border-bottom: 8px solid #FFDE00;
-}
-
-.fecha {
-    color: #4A4A4A;
-    font-size: 14px;
-}
-
-.noticia {
-    border: 2px solid #4A4A4A;
-    border-left: 10px solid #DE2910;
-    padding: 15px;
-    margin-bottom: 20px;
     background-color: #FFFFFF;
 }
 
+/* Solo la foto principal de la noticia destacada ocupa todo el
+   ancho. Se le pone una clase propia para que esta regla no
+   afecte a las fotos de las fichas, que son verticales y se
+   deformarian al estirarlas. */
+
+.foto-principal img {
+    border-bottom: 8px solid #FFDE00;
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------------
+   8. REJILLA DE NOTICIAS
+   Contenedor flexible con ajuste de línea. Cada tarjeta se
+   declara con "flex: 1 1 300px", que significa: puede crecer,
+   puede encogerse y su ancho de partida es de 300 píxeles. Con
+   esa regla las tarjetas se reacomodan solas según el ancho
+   disponible, sin necesidad de fijar el número de columnas.
+   ------------------------------------------------------------ */
+
+.rejilla {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.noticia {
+    flex: 1 1 300px;
+    border: 2px solid #4A4A4A;
+    border-left: 10px solid #DE2910;
+    padding: 15px;
+    background-color: #FFFFFF;
+
+    /* La tarjeta también es contenedor flexible en columna, para
+       que la fecha quede alineada al pie aunque los titulares
+       tengan distinto número de líneas. */
+    display: flex;
+    flex-direction: column;
+}
+
+.noticia h3 {
+    margin-top: 0;
+}
+
+/* "margin-top: auto" empuja este elemento hasta el fondo de la
+   tarjeta, ocupando todo el espacio sobrante. */
+
+.noticia .fecha {
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-top: 10px;
+}
+
+
+/* ------------------------------------------------------------
+   9. FICHAS DE ROBOT
+   La imagen y la ficha técnica se ubican una al lado de la otra
+   en pantallas anchas, y una debajo de la otra en móvil.
+   ------------------------------------------------------------ */
+
+.ficha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.ficha-imagen {
+    flex: 1 1 280px;
+}
+
+.ficha-datos {
+    flex: 2 1 380px;             /* ocupa el doble que la imagen */
+    min-width: 0;                /* permite que la tabla se encoja */
+}
+
+/* Las fotos de los robots son verticales. Se limita la altura y
+   el ancho se calcula solo, para que la foto conserve su
+   proporcion y no quede estirada. */
+
+.ficha-imagen img {
+    display: block;
+    max-width: 100%;
+    max-height: 420px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 8px solid #FFDE00;
+}
+
+
+/* ------------------------------------------------------------
+   10. TABLAS
+   ------------------------------------------------------------ */
+
 table {
     width: 100%;
-    border-collapse: collapse;   /* une los bordes de las celdas */
+    border-collapse: collapse;
     margin-bottom: 30px;
 }
 
@@ -162,48 +360,88 @@ td {
     border: 1px solid #4A4A4A;
 }
 
+/* La primera posición se destaca con fondo amarillo, pero la
+   palabra "Oro" aparece también escrita en la fila, para no
+   depender solo del color. */
+
 tr.primero td {
     background-color: #FFDE00;
     font-weight: bold;
 }
 
+
+/* ------------------------------------------------------------
+   11. FORMULARIO DE BÚSQUEDA
+   Los tres elementos se alinean en fila con Flexbox. El campo
+   de texto crece para ocupar el espacio libre.
+   ------------------------------------------------------------ */
+
 .busqueda {
     background-color: #111111;
     padding: 15px;
     margin-bottom: 30px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
 }
 
 .busqueda label {
     color: #FFFFFF;
     font-weight: bold;
-    margin-right: 10px;
 }
 
 .busqueda input {
-    padding: 8px;
+    flex: 1 1 200px;             /* crece hasta llenar el espacio */
+    padding: 10px;
     border: 2px solid #FFFFFF;
-    width: 250px;
+    font-size: 16px;             /* evita el zoom automático en iOS */
 }
 
 .busqueda button {
-    padding: 8px 16px;
+    padding: 10px 20px;
     background-color: #FFDE00;
     color: #111111;
     border: 2px solid #FFFFFF;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
 }
+
+.busqueda input:focus,
+.busqueda button:focus {
+    outline: 3px solid #FFDE00;
+    outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   12. PIE DE PÁGINA
+   Los bloques se reparten en fila y bajan uno debajo de otro
+   cuando no hay espacio.
+   ------------------------------------------------------------ */
 
 footer {
     background-color: #111111;
     color: #FFFFFF;
     padding: 25px 0;
     border-top: 8px solid #FFDE00;
-    margin-top: 40px;
 }
 
-footer a {
-    color: #FFDE00;
+.pie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.pie-bloque {
+    flex: 1 1 250px;
+}
+
+.pie-logo {
+    max-width: 200px;
 }
 
 footer h2 {
@@ -213,40 +451,39 @@ footer h2 {
     margin-top: 0;
 }
 
-/* ------------------------------------------------------------
-   CREDITOS DE IMAGEN
-   La etiqueta figure agrupa la imagen con su credito, y
-   figcaption es el texto asociado a esa imagen. Es la forma
-   semantica correcta de acreditar una fotografia.
-   ------------------------------------------------------------ */
-
-figure {
-    margin: 0 0 20px 0;
+footer a {
+    color: #FFDE00;              /* sobre negro da 14.1:1 */
 }
 
-figcaption {
-    font-size: 13px;
-    color: #4A4A4A;
-    padding-top: 6px;
-    word-wrap: break-word;
+footer a:focus {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 2px;
 }
 
 
-/* ------------------------------------------------------------
-   ADAPTACION A PANTALLAS PEQUENAS
-   La regla @media aplica estos estilos solo cuando el ancho de
-   la pantalla es igual o menor a 600 pixeles, que corresponde a
-   la mayoria de los telefonos.
-   ------------------------------------------------------------ */
+/* ============================================================
+   13. DISEÑO ADAPTABLE — MEDIA QUERIES
+   Una media query aplica un bloque de estilos solo cuando se
+   cumple una condición de ancho de pantalla. Se definen tres
+   puntos de corte.
+   ============================================================ */
+
+
+/* --- MÓVIL: hasta 600 px --------------------------------- */
 
 @media (max-width: 600px) {
 
-    /* El contenedor aprovecha casi todo el ancho disponible */
     .contenedor {
         width: 94%;
     }
 
-    /* Titulos mas pequenos para que no ocupen varias lineas */
+    /* El logotipo pasa encima del título en lugar de al lado */
+    .cabecera {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
     header h1 {
         font-size: 22px;
     }
@@ -255,22 +492,119 @@ figcaption {
         font-size: 20px;
     }
 
-    /* Cada opcion del menu ocupa su propia linea */
-    nav li {
-        display: block;
-        margin-right: 0;
-        margin-bottom: 5px;
+    /* Cada opción del menú ocupa el ancho completo */
+    nav ul {
+        flex-direction: column;
+        gap: 0;
     }
 
-    /* El campo de busqueda se ajusta al ancho de la pantalla */
-    .busqueda input {
-        width: 100%;
-        margin-bottom: 8px;
+    nav a {
+        padding: 12px 14px;
+        border-bottom: 1px solid #4A4A4A;
     }
 
-    /* Las tablas se pueden desplazar en horizontal si no caben */
+    /* Las noticias se apilan en una sola columna */
+    .noticia {
+        flex: 1 1 100%;
+    }
+
+    /* El botón de búsqueda ocupa todo el ancho */
+    .busqueda button {
+        flex: 1 1 100%;
+    }
+
+    /* El texto de las celdas se reparte en varias lineas para que
+       la tabla quepa en la pantalla. Si aun asi no cabe, como en
+       el medallero de seis columnas, la tabla se desplaza en
+       horizontal dentro de su propio marco. */
     table {
         display: block;
         overflow-x: auto;
+    }
+
+    th,
+    td {
+        padding: 6px;
+        font-size: 13px;
+    }
+
+    .pie {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+
+/* --- TABLETA: de 601 a 1024 px ---------------------------- */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+
+    .contenedor {
+        width: 92%;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    /* Dos columnas de noticias: cada tarjeta ocupa algo menos de
+       la mitad, descontando el espacio del hueco entre ellas. */
+    .noticia {
+        flex: 1 1 calc(50% - 20px);
+    }
+
+    /* La ficha de robot pasa a una sola columna, porque a este
+       ancho la tabla queda muy comprimida al lado de la imagen */
+    .ficha-imagen,
+    .ficha-datos {
+        flex: 1 1 100%;
+    }
+}
+
+
+/* --- ESCRITORIO: desde 1025 px --------------------------- */
+
+@media (min-width: 1025px) {
+
+    /* Tres columnas de noticias */
+    .noticia {
+        flex: 1 1 calc(33.333% - 20px);
+    }
+
+    header h1 {
+        font-size: 32px;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   14. PREFERENCIA DE MOVIMIENTO REDUCIDO
+   Respeta la configuración del sistema operativo de quienes
+   prefieren evitar animaciones (criterio 2.3.3 de WCAG).
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none;
+        animation: none;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   15. IMPRESIÓN
+   Oculta los elementos de navegación al imprimir una página.
+   ------------------------------------------------------------ */
+
+@media print {
+    nav,
+    .busqueda,
+    .salto {
+        display: none;
+    }
+
+    body {
+        background-color: #FFFFFF;
+        color: #000000;
     }
 }
